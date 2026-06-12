@@ -1,32 +1,33 @@
-# MP3 Spectrum Check — загрузки
+# MP3 Spectrum Check — downloads
 
-Инструмент для Windows: проверяет MP3 и FLAC по спектру и находит подделки —
-MP3, которые выдают за 320 kbps (а на деле апсемпл из низкого битрейта), и
-«липовый» FLAC, перекодированный из lossy. Плюс встроенный просмотрщик
-спектрограммы (как в Spek).
+A Windows tool that inspects MP3 and FLAC files by their spectrum to spot fakes —
+MP3s passed off as 320 kbps (but actually upsampled from a lower bitrate) and
+"fake" FLAC files transcoded from a lossy source. Includes a built-in
+spectrogram viewer (Spek-style).
 
-## Скачать
+## Download
 
-Последняя версия — на странице **[Releases](../../releases/latest)**.
-Скачай файл `MP3SpectrumCheck-Setup.exe` и запусти.
+Get the latest build from the **[Releases](../../releases/latest)** page.
+Download `MP3SpectrumCheck-Setup.exe` and run it.
 
-## Установка
+## Install
 
-1. Запусти `MP3SpectrumCheck-Setup.exe`, согласись на права администратора.
-2. На целевой машине **ничего не нужно** ставить заранее — ни Python, ни ffmpeg,
-   всё уже внутри.
-3. После установки: правый клик по MP3/FLAC или по папке → **«MP3 Spectrum Check»**.
-   На Windows 11 — сначала «Показать дополнительные параметры» (или Shift+ПКМ).
+1. Run `MP3SpectrumCheck-Setup.exe` and allow administrator privileges.
+2. **Nothing else is required** on the target machine — no Python, no ffmpeg;
+   everything is bundled inside.
+3. After installing: right-click an MP3/FLAC file or a folder →
+   **"MP3 Spectrum Check"**. On Windows 11, first choose
+   "Show more options" (or Shift+Right-click).
 
-Удаление — через «Приложения и возможности» Windows.
+Uninstall via Windows "Apps & features".
 
-## Важно
+## Note
 
-Метод не 100% точный: старые записи и некоторые студийные мастера тоже могут
-иметь срезанный верх. Подозрительный результат — повод для ручной проверки
-(открой спектрограмму), а не приговор.
+The method is not 100% accurate: vintage recordings and some studio masters can
+also have a rolled-off top end. Treat a suspicious result as a reason for manual
+review (open the spectrogram), not as a verdict.
 
 ---
 
-Исходный код — в отдельном приватном репозитории. Этот репозиторий нужен только
-для раздачи готовых сборок.
+The source code lives in a separate private repository. This repository exists
+only to distribute the ready-made builds.
