@@ -1,33 +1,98 @@
-# MP3 Spectrum Check — downloads
+# MP3 Spectrum Check
 
-A Windows tool that inspects MP3 and FLAC files by their spectrum to spot fakes —
-MP3s passed off as 320 kbps (but actually upsampled from a lower bitrate) and
-"fake" FLAC files transcoded from a lossy source. Includes a built-in
-spectrogram viewer (Spek-style).
+**Is that 320 kbps MP3 really 320? Check any downloaded track in seconds, and take a
+closer look when something seems off.**
 
-## Download
+Music downloaded from the internet is not always what it claims to be. A file says
+"320 kbps", but it was blown up from a 128 kbps copy. A "lossless" FLAC turns out to
+be a converted MP3. Every player shows the declared quality, on headphones it sounds
+fine, and you only notice on a big system, in the middle of a set, or never.
 
-Get the latest build from the **[Releases](../../releases/latest)** page.
-Download `MP3SpectrumCheck-Setup.exe` and run it.
+MP3 Spectrum Check is a free Windows tool that reads the truth from the audio itself:
+from its spectrum. It started as a quick fake detector and grew into a full quality
+inspection of a track.
 
-## Install
+## Check many files at once
 
-1. Run `MP3SpectrumCheck-Setup.exe` and allow administrator privileges.
-2. **Nothing else is required** on the target machine — no Python, no ffmpeg;
-   everything is bundled inside.
-3. After installing: right-click an MP3/FLAC file or a folder →
-   **"MP3 Spectrum Check"**. On Windows 11, first choose
-   "Show more options" (or Shift+Right-click).
+Select files or whole folders in Explorer, right-click and choose
+**MP3 Spectrum Check**, or drag them into the window. Every MP3, FLAC and OGG gets
+a verdict:
 
-Uninstall via Windows "Apps & features".
+| Verdict | What it means |
+|---|---|
+| **Likely genuine** | The spectrum reaches as high as the format and bitrate promise. |
+| **Suspicious** | It ends far too low: most likely made from a lower-quality source. The tool also estimates which one, e.g. "likely from a ~128 kbps source". |
+| **Not 320 kbps** | An honest MP3 or OGG at a lower bitrate, e.g. 192 kbps. Not a fake, just not full quality. |
+| **Can't judge** | Silence, or too quiet to measure. |
+| **Error** | The file could not be read. |
 
-## Note
+Also caught: fakes that hide their missing top under a layer of faint noise. The
+tool finds the sharp codec "wall" underneath.
 
-The method is not 100% accurate: vintage recordings and some studio masters can
-also have a rolled-off top end. Treat a suspicious result as a reason for manual
-review (open the spectrogram), not as a verdict.
+For recorded mixes (DJ sets, live recordings over 30 minutes) it also marks the
+parts that were played from a worse source, e.g. "51:50-56:00", so you know which
+track in the set was the bad one.
+
+One window collects everything: new files from Explorer go into it, several files
+are checked at the same time at low priority, so you can keep working.
+"Copy report" puts the full results on the clipboard.
+
+![The main window: a verdict, format and cutoff for every file](docs/main-window.png)
+
+## Take a closer look at one file
+
+Double-click a row to open its spectrogram, the kind of picture you may know from
+Spek, with the analysis drawn over it:
+
+- the measured cutoff as a curve, second by second, so you see exactly where the
+  track loses its top;
+- the threshold this file had to reach for its format and bitrate;
+- quiet parts that did not count for the verdict, drawn grey;
+- in a mix, the suspicious parts marked red.
+
+Then listen to what you see. Click anywhere on the picture and it plays from there.
+**Hear above 16 kHz** plays only the very top of the track, shifted down so you can
+actually hear it: a genuine track hisses and sparkles there, a fake from 128 kbps
+leaves a thin band or silence.
+
+Right-click a track to play it in your usual player or open it with another program.
+
+![A genuine 320 kbps MP3 in the spectrogram window](docs/spectrogram-genuine.png)
+*A genuine 320 kbps MP3: the cutoff runs near 20 kHz and dips only in the breaks,
+where there is little high-frequency sound.*
+
+![A fake 320 kbps MP3 in the spectrogram window](docs/spectrogram-fake.png)
+*A "320 kbps" MP3 made from a 128 kbps copy: the cutoff stays around 17 kHz, far
+below the 19.5 kHz threshold.*
+
+## How it works
+
+A lossy encoder throws away everything above a certain frequency: about 17 kHz at
+128 kbps, about 20 kHz at 320 kbps. Converting the file to a higher bitrate or to
+FLAC cannot bring that back, so the spectrum still ends in a sharp wall far below
+where it should. MP3 Spectrum Check measures where the spectrum really ends,
+every 10 seconds through the whole file, and compares that with what the format
+and bitrate promise.
+
+## Download and install
+
+1. Download `MP3SpectrumCheck-Setup.exe` from the **[latest release](../../releases/latest)**.
+2. Run it and allow administrator rights. Nothing else is needed: no Python,
+   no ffmpeg, everything is inside.
+3. On Windows 11 the Explorer command is under *Show more options*
+   (or hold Shift while right-clicking). The program is also in the Start menu.
+
+To update, close the program and run the new installer over the old version.
+Uninstall from Windows "Apps & features".
+
+## Limits
+
+The method is not 100% accurate. Some old recordings and some masters roll off the
+top on purpose, so treat *Suspicious* as a reason to look and listen closer, not as
+a final verdict. It also cannot expose a fake made from a high-quality lossy source
+(LAME V0, 256 kbps): its spectrum is practically the same as the real thing.
 
 ---
 
-The source code lives in a separate private repository. This repository exists
-only to distribute the ready-made builds.
+This repository only hosts the ready-made installer. The source code is in a
+separate private repository.
