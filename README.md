@@ -1,4 +1,4 @@
-# MP3 Spectrum Check
+# Audio Spectrum Check
 
 **Is that 320 kbps MP3 really 320? Check any downloaded track in seconds, and take a
 closer look when something seems off.**
@@ -8,21 +8,21 @@ Music downloaded from the internet is not always what it claims to be. A file sa
 be a converted MP3. Every player shows the declared quality, on headphones it sounds
 fine, and you only notice on a big system, in the middle of a set, or never.
 
-MP3 Spectrum Check is a free Windows tool that reads the truth from the audio itself:
+Audio Spectrum Check is a free Windows tool that reads the truth from the audio itself:
 from its spectrum. It started as a quick fake detector and grew into a full quality
 inspection of a track.
 
 ## Check many files at once
 
 Select files or whole folders in Explorer, right-click and choose
-**MP3 Spectrum Check**, or drag them into the window. Every MP3, FLAC and OGG gets
+**Audio Spectrum Check**, or drag them into the window. Every MP3, FLAC and OGG gets
 a verdict:
 
 | Verdict | What it means |
 |---|---|
 | **Likely genuine** | The spectrum reaches as high as the format and bitrate promise. |
 | **Suspicious** | It ends far too low: most likely made from a lower-quality source. The tool also estimates which one, e.g. "likely from a ~128 kbps source". |
-| **Not 320 kbps** | An honest MP3 or OGG at a lower bitrate, e.g. 192 kbps. Not a fake, just not full quality. |
+| **Lower bitrate** | A genuine file at a bitrate below 320 kbps, e.g. MP3 192 or OGG 192. Not a fake. How it sounds depends on the codec: MP3 192 loses some detail, while OGG from 192 kbps keeps the whole frequency range and sounds close to MP3 320. |
 | **Can't judge** | Silence, or too quiet to measure. |
 | **Error** | The file could not be read. |
 
@@ -70,13 +70,15 @@ below the 19.5 kHz threshold.*
 A lossy encoder throws away everything above a certain frequency: about 17 kHz at
 128 kbps, about 20 kHz at 320 kbps. Converting the file to a higher bitrate or to
 FLAC cannot bring that back, so the spectrum still ends in a sharp wall far below
-where it should. MP3 Spectrum Check measures where the spectrum really ends,
+where it should. Audio Spectrum Check measures where the spectrum really ends,
 every 10 seconds through the whole file, and compares that with what the format
-and bitrate promise.
+and bitrate promise. MP3 and OGG are each checked against the cutoffs their own
+encoder leaves at every bitrate: OGG Vorbis keeps much more of the top than MP3,
+and from 192 kbps up it keeps all of it.
 
 ## Download and install
 
-1. Download `MP3SpectrumCheck-Setup.exe` from the **[latest release](../../releases/latest)**.
+1. Download `AudioSpectrumCheck-Setup.exe` from the **[latest release](../../releases/latest)**.
 2. Run it and allow administrator rights. Nothing else is needed: no Python,
    no ffmpeg, everything is inside.
 3. On Windows 11 the Explorer command is under *Show more options*
