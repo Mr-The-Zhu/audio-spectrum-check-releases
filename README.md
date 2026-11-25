@@ -87,6 +87,38 @@ and from 192 kbps up it keeps all of it.
 To update, close the program and run the new installer over the old version.
 Uninstall from Windows "Apps & features".
 
+## Use it from Mp3tag
+
+Mp3tag can start the check for the files you select there. Open Mp3tag's
+**Options** (Ctrl+O), go to **Tools**, and add two tools with **New**:
+
+| Name | Path | Parameter | For all selected files |
+|---|---|---|---|
+| Audio Spectrum Check | `C:\Program Files (x86)\AudioSpectrumCheck\AudioSpectrumCheck.exe` | `"%_path%"` | on |
+| Audio Spectrum Check (folder) | the same | `"%_folderpath%."` | off |
+
+The path is where the installer puts the program by default. The first tool
+checks the selected files: Mp3tag starts the program once for each file, and
+they all go into the same window. The second checks the whole folder of the
+selected file, subfolders included. Keep the dot at the end of
+`"%_folderpath%."`: without it the folder path ends with a backslash, which
+Windows would read together with the closing quote.
+
+Then select files in Mp3tag, right-click and choose **Tools** > **Audio
+Spectrum Check**.
+
+## If something goes wrong
+
+The program keeps a log of what it checked and of any errors, with the details
+needed to find the cause. Click **Open log** at the bottom right of the window,
+next to About, to open it. The file is
+`%APPDATA%\Audio Spectrum Check\AudioSpectrumCheck.log`.
+
+The log stays on your computer: nothing is sent anywhere. It keeps the last
+1000 lines. It lists the files you checked with their paths, with your user
+folder written as `%USERPROFILE%`, so you can paste it into a forum post when
+asking for help.
+
 ## Limits
 
 The method is not 100% accurate. Some old recordings and some masters roll off the
