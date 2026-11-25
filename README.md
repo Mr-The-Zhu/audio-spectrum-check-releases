@@ -95,14 +95,15 @@ Mp3tag can start the check for the files you select there. Open Mp3tag's
 | Name | Path | Parameter | For all selected files |
 |---|---|---|---|
 | Audio Spectrum Check | `C:\Program Files (x86)\AudioSpectrumCheck\AudioSpectrumCheck.exe` | `"%_path%"` | on |
-| Audio Spectrum Check (folder) | the same | `"%_folderpath%."` | off |
+| Audio Spectrum Check (folder) | the same | `--no-subfolders "%_folderpath%."` | off |
 
 The path is where the installer puts the program by default. The first tool
 checks the selected files: Mp3tag starts the program once for each file, and
-they all go into the same window. The second checks the whole folder of the
-selected file, subfolders included. Keep the dot at the end of
-`"%_folderpath%."`: without it the folder path ends with a backslash, which
-Windows would read together with the closing quote.
+they all go into the same window. The second checks only the folder of the
+selected file, typically one album; to include its subfolders too, remove
+`--no-subfolders`. Keep the dot at the end of `"%_folderpath%."`: without it
+the folder path ends with a backslash, which Windows would read together with
+the closing quote.
 
 Then select files in Mp3tag, right-click and choose **Tools** > **Audio
 Spectrum Check**.
