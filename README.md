@@ -1,7 +1,7 @@
 # Audio Spectrum Check
 
-**Is that 320 kbps MP3 really 320? Check any downloaded track in seconds, and take a
-closer look when something seems off.**
+**Is your music really the quality it claims? Check downloaded tracks in seconds, and
+take a closer look when something seems off.**
 
 Music downloaded from the internet is not always what it claims to be. A file says
 "320 kbps", but it was blown up from a 128 kbps copy. A "lossless" FLAC turns out to
@@ -73,7 +73,7 @@ FLAC cannot bring that back, so the spectrum still ends in a sharp wall far belo
 where it should. Audio Spectrum Check measures where the spectrum really ends,
 every 10 seconds through the whole file, and compares that with what the format
 and bitrate promise. MP3 and OGG are each checked against the cutoffs their own
-encoder leaves at every bitrate: OGG Vorbis keeps much more of the top than MP3,
+encoder leaves at each common bitrate: OGG Vorbis keeps much more of the top than MP3,
 and from 192 kbps up it keeps all of it.
 
 ## Download and install
